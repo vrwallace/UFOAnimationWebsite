@@ -7,13 +7,14 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 
-
     const ufo = document.querySelector('#ufo');
     var alienBump = document.getElementById("alienBump");
 
 
     const leftPupil = document.querySelector('#left-pupil');
     const rightPupil = document.querySelector('#right-pupil');
+    const leftEye = document.querySelector('#left-eye');
+    const rightEye = document.querySelector('#right-eye');
 
     const tongue = document.querySelector('#tongue');
     const ufoArms = document.querySelector('#ufo-arms');
@@ -31,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
     ufo.addEventListener('click', waveArms);
     ufo.addEventListener('click', function () {
 
@@ -43,9 +43,15 @@ document.addEventListener("DOMContentLoaded", function () {
            responseSound = document.querySelector('#');
         }*/
 
-       // responseSound = document.querySelector('#donteverletgo');
+        responseSound = document.querySelector('#redalert');
 
-        //responseSound.play();
+        responseSound.play();
+
+        setTimeout(function () {
+            responseSound.pause();
+            responseSound.currentTime = 0;
+        }, 5000);
+
     });
 
     function stickOutTonguet() {
@@ -71,13 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000);
 
         // UFO is moving right
-        leftPupil.setAttribute('cx', '46');
-
+        //leftPupil.setAttribute('cx', '46');
+        leftPupil.setAttribute('cx', '49');
         // UFO is moving left
 
-        rightPupil.setAttribute('cx', '54');
-
-        //const originalMouthPath = mouth.getAttribute('d');
+        //rightPupil.setAttribute('cx', '54');
+        rightPupil.setAttribute('cx', '51');
 
 
         mouth.setAttribute('d', 'M 45 30 Q 50 25 55 30');
@@ -88,11 +93,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         leftPupil.style.fill = 'red';
         rightPupil.style.fill = 'red';
+        leftEye.setAttribute("r", "6");
+        rightEye.setAttribute("r", "6");
+
+
 
         // After 1 second, change the color back to black
         setTimeout(function () {
             leftPupil.style.fill = 'black';
             rightPupil.style.fill = 'black';
+            leftEye.setAttribute("r", "3");
+            rightEye.setAttribute("r", "3");
+
         }, 4000);
 
         // Return pupils to center after 1 second
@@ -105,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listener for click event
-    /* ufo.addEventListener('click', stickOutTonguet);*/
+
     ufo.addEventListener('click', stickOutTonguet);
 
 
@@ -115,26 +127,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function animateUFO() {
         if (!ufo) {
             console.log('ufo Element not found!');
-            return;}
+            return;
+        }
 
         const ufoWidth = ufo.getBoundingClientRect().width;
         const ufoHeight = ufo.getBoundingClientRect().height;
         const navBar = document.querySelector('.navbar');
-        const navBarHeight = navBar.getBoundingClientRect().height*2;
+        const navBarHeight = navBar.getBoundingClientRect().height * 2;
 
         let ufox, ufoy;
 
-       /* if (window.crypto && window.crypto.getRandomValues) {
-            const randomX = window.crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
-            const randomY = window.crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
-
-            ufox = randomX * (window.innerWidth - ufoWidth * 2);
-            ufoy = randomY * (window.innerHeight - ufoHeight * 2);
-        } else {
-            ufox = Math.random() * (window.innerWidth - ufo.getBoundingClientRect().width * 2);
-            ufoy = Math.random() * (window.innerHeight - ufo.getBoundingClientRect().height * 2);
-
-        }*/
 
         if (window.crypto && window.crypto.getRandomValues) {
             const randomX = window.crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
@@ -148,15 +150,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-
-
         const speechBubble = document.querySelector('#speech-bubble');
 
 
         let bubbleX = ufox + 60;
         let bubbleY = ufoy - 90;
-
-
 
 
         // Check if speech bubble will be cut off at the right or bottom edge and adjust position
@@ -235,27 +233,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-    function changeSpeechBubbleText(text) {
-        const bubble = document.querySelector('#speech-bubble');
-        const bubbleText = document.querySelector('#speech-text');
+function changeSpeechBubbleText(text) {
+    const bubble = document.querySelector('#speech-bubble');
+    const bubbleText = document.querySelector('#speech-text');
 
-        bubble.style.opacity = 1;
-        bubbleText.textContent = text;
+    bubble.style.opacity = 1;
+    bubbleText.textContent = text;
 
-        // Check screen width
-        let displayDuration;
-        if (window.innerWidth <= 768) {
-            // If the screen is small (<= 768px), show for 3 seconds
-            displayDuration = 5000;
-        } else {
-            // If the screen is large, show for 10 seconds
-            displayDuration = 10000;
-        }
-
-        setTimeout(function () {
-            bubble.style.opacity = 0;
-        }, displayDuration);
+    // Check screen width
+    let displayDuration;
+    if (window.innerWidth <= 768) {
+        // If the screen is small (<= 768px), show for 3 seconds
+        displayDuration = 7000;
+    } else {
+        // If the screen is large, show for 10 seconds
+        displayDuration = 12000;
     }
+
+    setTimeout(function () {
+        bubble.style.opacity = 0;
+    }, displayDuration);
+}
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -319,7 +317,104 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     function randomlyShowSpeechBubble() {
         // Array of alien sayings
-        let alienSayings = ["Greetings, Earthlings!", "Do not be afraid, we come in peace.", "Take me to your leader.", "Your planet is quite fascinating!", "We've been observing your kind for centuries.", "We're not so different, you and I.", "In our world, you are the alien.", "We can travel across galaxies in a blink.", "Time is just a concept for us.", "Our technology is far beyond your understanding.", "You have much to learn, Earthling.", "Human emotions are quite intriguing.", "We have no use for money in our world.", "Fear not our appearance, it's merely different, not dangerous.", "You call it magic, we call it science.", "We communicate through telepathy.", "I've seen stars you've never heard of.", "Interstellar travel is as common for us as taking a walk.", "I come from a place where the sun never sets.", "We mastered immortality eons ago.", "Your Earth food is quite...interesting.", "We are all made of stardust, after all.", "Our species has no concept of war.", "Earth's music is quite melodious.", "Your oceans are akin to our skies.", "In our realm, time travels you.", "Your 'Internet' is quaint compared to our data spheres.", "We've known about Earth since before your Great Pyramids were built.", "We exist in dimensions you cannot perceive.", "Our planet's hue is a color you've never seen.", "You're not alone in the universe.", "We have found no other species as unique as humans.", "Our lifespan is not limited by time.", "We do not need oxygen to survive.", "Gravity affects us differently.", "The universe is full of surprises.", "Your languages are fascinatingly diverse.", "We've learned to harness the energy of black holes.", "We've observed your movies about aliens. They're mostly incorrect.", "We are all citizens of the cosmos.", "We've decoded your DNA structure.", "Stars are our stepping stones.", "We've seen the beginning and end of galaxies.", "We have observed and learned from your world wars.", "We do not age as you do.", "The concept of sleep is foreign to us.", "We have no concept of countries or borders.", "Your planet's wildlife is fascinating.", "We've visited Earth in different epochs.", "Our planet is much larger than Earth.", "Your sense of humor is truly unique.", "We know of life forms that you cannot comprehend.", "The idea of death is alien to us.", "Your dreams are intriguing.", "Your sense of taste is unique.", "You have a beautiful planet."];
+        // let alienSayings = ["Greetings, Earthlings!", "Do not be afraid, we come in peace.", "Take me to your leader.", "Your planet is quite fascinating!", "We've been observing your kind for centuries.", "We're not so different, you and I.", "In our world, you are the alien.", "We can travel across galaxies in a blink.", "Time is just a concept for us.", "Our technology is far beyond your understanding.", "You have much to learn, Earthling.", "Human emotions are quite intriguing.", "We have no use for money in our world.", "Fear not our appearance, it's merely different, not dangerous.", "You call it magic, we call it science.", "We communicate through telepathy.", "I've seen stars you've never heard of.", "Interstellar travel is as common for us as taking a walk.", "I come from a place where the sun never sets.", "We mastered immortality eons ago.", "Your Earth food is quite...interesting.", "We are all made of stardust, after all.", "Our species has no concept of war.", "Earth's music is quite melodious.", "Your oceans are akin to our skies.", "In our realm, time travels you.", "Your 'Internet' is quaint compared to our data spheres.", "We've known about Earth since before your Great Pyramids were built.", "We exist in dimensions you cannot perceive.", "Our planet's hue is a color you've never seen.", "You're not alone in the universe.", "We have found no other species as unique as humans.", "Our lifespan is not limited by time.", "We do not need oxygen to survive.", "Gravity affects us differently.", "The universe is full of surprises.", "Your languages are fascinatingly diverse.", "We've learned to harness the energy of black holes.", "We've observed your movies about aliens. They're mostly incorrect.", "We are all citizens of the cosmos.", "We've decoded your DNA structure.", "Stars are our stepping stones.", "We've seen the beginning and end of galaxies.", "We have observed and learned from your world wars.", "We do not age as you do.", "The concept of sleep is foreign to us.", "We have no concept of countries or borders.", "Your planet's wildlife is fascinating.", "We've visited Earth in different epochs.", "Our planet is much larger than Earth.", "Your sense of humor is truly unique.", "We know of life forms that you cannot comprehend.", "The idea of death is alien to us.", "Your dreams are intriguing.", "Your sense of taste is unique.", "You have a beautiful planet."];
+
+        let alienSayings = ["John 3:16 - 'God loved the world, gave His only Son.'",
+            "Romans 5:8 - 'God shows His love: Christ died for us.'",
+            "1 John 4:16 - 'God is love. Live in love, live in God.'",
+            "Ephesians 2:4-5 - 'God loved us, even in our sins.'",
+            "1 John 4:9 - 'God sent His Son, so we might live.'",
+            "Psalm 136:26 - 'Give thanks. His love endures forever.'",
+            "Romans 8:39 - 'Nothing separates us from God's love.'",
+            "1 John 3:1 - 'See Father's love. We are God's children.'",
+            "Jeremiah 31:3 - 'I loved you with an everlasting love.'",
+            "Zephaniah 3:17 - 'The LORD rejoices over you with gladness.'",
+            "Isaiah 43:4 - 'You are precious and honored in my sight.'",
+            "Ephesians 3:19 - 'Know the love of Christ that surpasses knowledge.'",
+            "Psalm 86:15 - 'Lord, you are compassionate and gracious.'",
+            "1 John 4:19 - 'We love because He first loved us.'",
+            "1 John 4:8 - 'God is love.'",
+            "John 15:13 - 'Greater love: to lay down one's life for friends.'",
+            "1 Peter 5:7 - 'Cast all your anxiety on him. He cares for you.'",
+            "Romans 8:28 - 'God works for the good of those who love Him.'",
+            "Psalm 136:2 - 'God's steadfast love endures forever.'",
+            "1 Corinthians 2:9 - 'God prepares unimaginable things for those who love Him.'",
+            "Exodus 34:6 - 'God is compassionate, gracious, slow to anger.'",
+            "Deuteronomy 7:9 - 'God's faithful love endures to a thousand generations.'",
+            "1 John 4:10 - 'God’s love: sent his Son to be the savior.'",
+            "Ephesians 3:17 - 'Christ dwells in hearts through faith.'",
+            "Romans 5:5 - 'God's love is poured into our hearts.'",
+            "Psalm 103:17 - 'God's love is from everlasting to everlasting.'",
+            "Psalm 33:5 - 'He loves righteousness and justice.'",
+            "Psalm 130:7 - 'With the LORD is steadfast love.'",
+            "Psalm 100:5 - 'The LORD is good, his steadfast love endures.'",
+            "Romans 5:8 - 'Christ died for us.'",
+            "1 John 4:16 - 'God is love.'",
+            "1 John 4:8 - 'God is love.'",
+            "Deuteronomy 4:31 - 'The LORD your God is a merciful God.'",
+            "Psalm 46:1 - 'God is our refuge and strength.'",
+            "Isaiah 40:28 - 'God's understanding is unsearchable.'",
+            "Psalm 145:8 - 'The LORD is gracious and merciful.'",
+            "Isaiah 63:7 - 'I will mention of the kindnesses of the LORD.'",
+            "Lamentations 3:22 - 'God's mercies never come to an end.'",
+            "Psalm 36:5 - 'Your steadfast love, O LORD, extends to the heavens.'",
+            "Psalm 23:1 - 'The LORD is my shepherd; I shall not want.'",
+            "Philippians 4:19 - 'God supplies every need of yours.'",
+            "Psalm 18:2 - 'The LORD is my rock and my fortress.'",
+            "Psalm 145:18 - 'The LORD is near to all who call on him.'",
+            "Psalm 40:5 - 'You have multiplied, O LORD my God.'",
+            "Psalm 94:19 - 'Your consolations cheer my soul.'",
+            "Psalm 145:9 - 'The LORD is good to all.'",
+            "Psalm 145:13 - 'The LORD is faithful in all his words.'",
+            "Psalm 145:14 - 'The LORD raises up all who are bowed down.'",
+            "Psalm 62:7 - 'In God is my salvation and my glory.'",
+            "Psalm 27:1 - 'The LORD is my light and my salvation.'",
+            "Psalm 118:1 - 'Give thanks to the Lord, for He is good.'",
+            "Psalm 46:1 - 'God is our refuge and strength.'",
+            "Deuteronomy 31:6 - 'The Lord your God goes with you.'",
+            "Psalm 146:2 - 'I will praise the Lord all my life.'",
+            "1 John 4:16 - 'We have known and believed the love that God has for us.'",
+            "1 John 3:16 - 'He laid down His life for us.'",
+            "Romans 5:5 - 'The love of God has been poured out in our hearts.'",
+            "1 John 4:4 - 'He who is in you is greater than he who is in the world.'",
+            "1 Corinthians 1:9 - 'God is faithful.'",
+            "1 Corinthians 2:9 - 'God has prepared for those who love Him.'",
+            "1 Corinthians 16:24 - 'My love be with you all in Christ Jesus.'",
+            "Psalm 136:26 - 'Give thanks to the God of heaven.'",
+            "2 Corinthians 1:3 - 'The Father of compassion and the God of all comfort.'",
+            "Ephesians 3:18 - 'Grasp how wide and long and high and deep is the love of Christ.'",
+            "Psalm 100:5 - 'For the LORD is good and His love endures forever.'",
+            "Jeremiah 31:3 - 'I have loved you with an everlasting love.'",
+            "Zephaniah 3:17 - 'The LORD your God is in your midst.'",
+            "John 3:16 - 'God so loved the world.'",
+            "Romans 8:38-39 - 'Nothing can separate us from the love of God.'",
+            "Psalm 86:15 - 'O Lord, are a God merciful and gracious.'",
+            "Psalm 103:8 - 'The LORD is merciful and gracious.'",
+            "Lamentations 3:22 - 'The steadfast love of the LORD never ceases.'",
+            "Isaiah 54:10 - 'My steadfast love shall not depart from you.'",
+            "1 John 3:1 - 'We should be called children of God.'",
+            "Psalm 147:3 - 'He heals the brokenhearted and binds up their wounds.'",
+            "Isaiah 43:4 - 'You are precious in my eyes, and honored, and I love you.'",
+            "1 John 4:10 - 'He loved us and sent his Son.'",
+            "Psalm 63:3 - 'Your steadfast love is better than life.'",
+            "Psalm 136:23 - 'His steadfast love endures forever.'",
+            "Romans 5:2-5 - 'Hope does not put us to shame, because God’s love.'",
+            "Psalm 31:7 - 'I will rejoice and be glad in your steadfast love.'",
+            "1 John 4:7 - 'Let us love one another, for love is from God.'",
+            "1 John 4:9 - 'God sent his only Son into the world.'",
+            "Galatians 2:20 - 'Christ loved me and gave himself for me.'",
+            "Romans 13:10 - 'Love does no harm to a neighbor.'",
+            "1 John 4:20 - 'If anyone says, I love God, and hates his brother, he is a liar.'",
+            "1 Corinthians 13:13 - 'Now these three remain: faith, hope and love. But the greatest of these is love.'",
+            "John 13:34 - 'Just as I have loved you, you also are to love one another.'",
+            "1 Corinthians 16:14 - 'Let all that you do be done in love.'",
+            "1 Peter 4:8 - 'Above all, keep loving one another earnestly.'",
+            "Proverbs 10:12 - 'Hatred stirs up strife, but love covers all offenses.'",
+            "1 John 4:18 - 'Perfect love casts out fear.'",
+            "Ephesians 5:2 - 'Walk in love, as Christ loved us.'",
+            "1 Corinthians 13:4-7 - 'Love is patient and kind.'",
+            "Galatians 5:22 - 'The fruit of the Spirit is love.'",
+            "1 John 3:18 - 'Let us not love in word or talk but in deed and in truth.'"];
 
 
         // 3% chance to show a speech bubble
@@ -342,7 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 // Call the function every 10 seconds
-    setInterval(randomlyShowSpeechBubble, 10000);
+    setInterval(randomlyShowSpeechBubble, 14000);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -466,3 +561,34 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 10000);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    function surprise() {
+        // Get the elements
+        const leftEye = document.querySelector('#left-eye');
+        const rightEye = document.querySelector('#right-eye');
+        const mouth = document.querySelector('#mouth');
+
+        // Make the pupils bigger (more surprised)
+        leftEye.setAttribute("r", "6");
+        rightEye.setAttribute("r", "6");
+
+        // Change the shape of the mouth to a surprised look
+        mouth.setAttribute("d", "M 45 30 Q 50 25 55 30");
+
+        // After 2 seconds, change the face back to its original appearance
+        setTimeout(() => {
+            leftEye.setAttribute("r", "3");
+            rightEye.setAttribute("r", "3");
+            mouth.setAttribute("d", "M 45 30 Q 50 35 55 30");
+        }, 2000);
+    }
+
+    // Call surprise every 10 seconds, but only 3% of the time.
+    setInterval(() => {
+        if (Math.random() < 0.03) {
+            surprise();
+        }
+    }, 10000);
+});
+
