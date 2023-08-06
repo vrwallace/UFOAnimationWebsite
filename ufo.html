@@ -1,0 +1,94 @@
+<style>
+        .ufo {
+             position: absolute;
+             transition: top 2s, left 2s;
+             z-index: 100;
+             /* filter: brightness(100%) contrast(100%) blur(0px);*/
+
+             }
+
+
+.speech-bubble {
+    position: absolute;
+    width: auto;
+        height: auto;
+        min-width: 200px; /* adjust as needed */
+        min-height: 80px; /* adjust as needed */
+
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, top 2s, left 2s;
+    color: #000; /* This line makes the text black */
+
+}
+
+.speech-bubble:before {
+content: ""; /*sd*/
+bottom: -20px; /*sd*/
+left: 10%; /*sd*/
+border-color: #ffffff transparent transparent transparent ; /*sd*/
+
+    position: absolute;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+}
+    #left-arm {
+        transform-origin: 100% 100%;
+        transition: transform 1s ease-in-out;
+    }
+
+    #right-arm {
+        transform-origin: 0% 100%;
+        transition: transform 1s ease-in-out;
+    }
+</style>
+
+</script>
+<div id="speech-bubble" class="speech-bubble">
+    <p id="speech-text"></p>
+</div>
+
+<svg class="ufo" id="ufo" width="120" height="120" viewBox="0 0 120 120" filter="url(#f1)" style="visibility: hidden; pointer-events: all;">
+    <defs>
+        <filter id="f1" x="-10%" y="-10%" width="200%" height="200%">
+            <feOffset result="offOut" in="SourceGraphic" dx="5" dy="5" />
+            <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+            <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
+    </defs>
+    <g transform="translate(10, 10)">
+        <!-- Your SVG elements here -->
+        <ellipse cx="50" cy="50" rx="50" ry="25" id="ufoLimePart" style="fill:lime"/>
+        <ellipse cx="50" cy="42" rx="30" ry="12" id="ufoBluePart" style="fill:blue"/>
+        <circle cx="50" cy="25" r="15" id="alienBump" style="fill:green"/>
+        <circle id="left-eye" cx="45" cy="20" r="3" style="fill:white"/>
+        <circle id="right-eye" cx="55" cy="20" r="3" style="fill:white"/>
+        <circle id="left-pupil" cx="45" cy="20" r="1.5" style="fill:black"/>
+        <circle id="right-pupil" cx="55" cy="20" r="1.5" style="fill:black"/>
+        <line id="left-antenna" x1="50" y1="15" x2="48" y2="5" style="stroke:white;stroke-width:2"/>
+        <line id="right-antenna" x1="50" y1="15" x2="52" y2="5" style="stroke:white;stroke-width:2"/>
+        <g id="ufo-arms" transform="rotate(0,50,25)">
+            <line id="left-arm" x1="40" y1="25" x2="35" y2="15" style="stroke:white;stroke-width:2"/>
+            <line id="right-arm" x1="60" y1="25" x2="65" y2="15" style="stroke:white;stroke-width:2"/>
+        </g>
+        <path id="mouth" d="M 45 30 Q 50 35 55 30" stroke="black" fill="transparent"/>
+        <path id="tongue" d="M 45 30 Q 50 35 55 30" stroke="pink" fill="pink" style="display: none;"/>
+    </g>
+    <rect id="catchAll" width="100%" height="100%" fill="transparent" style="cursor:pointer;"/>
+</svg>
+
+<script src="/js/ufo.js"></script>
+
+
+
+
+
+
