@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         mouth.setAttribute('d', 'M 45 30 Q 50 25 55 30');
+
         // After 1 second, reset the mouth
         setTimeout(function () {
             mouth.setAttribute('d', 'M 45 30 Q 50 35 55 30');
@@ -96,6 +97,12 @@ document.addEventListener("DOMContentLoaded", function () {
         leftEye.setAttribute("r", "6");
         rightEye.setAttribute("r", "6");
 
+        /*// Trigger the lightning effect
+        document.body.classList.add('lightningEffect');
+        // Remove the lightning effect after a short duration
+        setTimeout(() => {
+            document.body.classList.remove('lightningEffect');
+        }, 5000);*/
 
 
         // After 1 second, change the color back to black
@@ -132,8 +139,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const ufoWidth = ufo.getBoundingClientRect().width;
         const ufoHeight = ufo.getBoundingClientRect().height;
-        const navBar = document.querySelector('.navbar');
-        const navBarHeight = navBar.getBoundingClientRect().height * 2;
+        //const navBar = document.querySelector('.navbar');
+        //const navBarHeight = navBar.getBoundingClientRect().height * 2;
+
+        const navbar = document.querySelector('.navbar');
+        const navBarHeight = navbar.offsetHeight+(ufoHeight*2);
+
 
         let ufox, ufoy;
 
@@ -317,7 +328,6 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     function randomlyShowSpeechBubble() {
         // Array of alien sayings
-        // let alienSayings = ["Greetings, Earthlings!", "Do not be afraid, we come in peace.", "Take me to your leader.", "Your planet is quite fascinating!", "We've been observing your kind for centuries.", "We're not so different, you and I.", "In our world, you are the alien.", "We can travel across galaxies in a blink.", "Time is just a concept for us.", "Our technology is far beyond your understanding.", "You have much to learn, Earthling.", "Human emotions are quite intriguing.", "We have no use for money in our world.", "Fear not our appearance, it's merely different, not dangerous.", "You call it magic, we call it science.", "We communicate through telepathy.", "I've seen stars you've never heard of.", "Interstellar travel is as common for us as taking a walk.", "I come from a place where the sun never sets.", "We mastered immortality eons ago.", "Your Earth food is quite...interesting.", "We are all made of stardust, after all.", "Our species has no concept of war.", "Earth's music is quite melodious.", "Your oceans are akin to our skies.", "In our realm, time travels you.", "Your 'Internet' is quaint compared to our data spheres.", "We've known about Earth since before your Great Pyramids were built.", "We exist in dimensions you cannot perceive.", "Our planet's hue is a color you've never seen.", "You're not alone in the universe.", "We have found no other species as unique as humans.", "Our lifespan is not limited by time.", "We do not need oxygen to survive.", "Gravity affects us differently.", "The universe is full of surprises.", "Your languages are fascinatingly diverse.", "We've learned to harness the energy of black holes.", "We've observed your movies about aliens. They're mostly incorrect.", "We are all citizens of the cosmos.", "We've decoded your DNA structure.", "Stars are our stepping stones.", "We've seen the beginning and end of galaxies.", "We have observed and learned from your world wars.", "We do not age as you do.", "The concept of sleep is foreign to us.", "We have no concept of countries or borders.", "Your planet's wildlife is fascinating.", "We've visited Earth in different epochs.", "Our planet is much larger than Earth.", "Your sense of humor is truly unique.", "We know of life forms that you cannot comprehend.", "The idea of death is alien to us.", "Your dreams are intriguing.", "Your sense of taste is unique.", "You have a beautiful planet."];
 
         let alienSayings = ["John 3:16 - 'God loved the world, gave His only Son.'",
             "Romans 5:8 - 'God shows His love: Christ died for us.'",
